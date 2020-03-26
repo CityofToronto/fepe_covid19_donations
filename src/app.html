@@ -1,0 +1,103 @@
+<!--
+IMPORTANT:
+Any resources from this project should be referenced using SRC_PATH preprocessor var.
+See examples below in the boilerplate code
+-->
+
+<!--
+1. HEADER
+Everything inside this cot-app:head tag will be loaded at the end of the page's HEAD tag.
+It should contain stylesheet references (and possibly other stuff) that this application requires.
+-->
+<!-- cot-app:head -->
+
+<!-- @if !IS_EMBEDDED -->
+<!-- standalone apps may want to set some meta tags in here -->
+<title>fepe_covid19_donations</title>
+<meta property="og:title" content="fepe_covid19_donations">
+<meta name="DC.title" content="fepe_covid19_donations">
+<meta name="WT.sp" content="fepe_covid19_donations">
+<meta property="og:description" content="Page Description">
+<meta name="DC.description" lang="en" content="Page Description">
+<meta name="description" content="Page Description">
+<meta name="keywords" content="Key Words">
+<meta name="Author" content="City of Toronto">
+<meta name="Owner" content="City of Toronto">
+<meta name="DC.language" content="en-CA">
+<meta name="DC.subject" content="fepe_covid19_donations">
+<meta charset="UTF-8">
+<!--@endif-->
+
+<!-- From here to the next endbuild tag, all the files will be concatenated into a single file called main.css: -->
+<!--@exec startBuildTagWithCacheBuster('styles/main.css')-->
+<!-- CoreJS uses the following core:css/endinject tag to inject bower_components stylesheet file references: -->
+<!-- core:css -->
+<!-- endinject -->
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- place your application stylesheet references here: -->
+<link rel="stylesheet" type="text/css" href="<!-- @echo SRC_PATH -->/styles/main.css">
+
+<!-- endbuild -->
+
+<!-- From here to the next endbuild tag, all the files will be concatenated into a single print-only file called core_print.css: -->
+<!--@exec startBuildTagWithCacheBuster('styles/core_print.css', 'media="print"')-->
+<!-- CoreJS uses the following core_print:css/endinject tag to inject bower_components print-only stylesheet file references: -->
+<!-- core_print:css -->
+<!-- endinject -->
+
+<!-- place any application print-only stylesheet references here -->
+
+<!-- endbuild -->
+<!-- cot-app:head end-->
+
+<!--
+2. BODY
+Everything inside this cot-app:body tag will be loaded inside the webpage
+It should contain the HTML elements that make up the visual portion of this application.
+IMPORTANT:
+Remember to use unique element IDs and class names so that this app doesn't interfere with other parts of the cframe/website
+-->
+<!-- cot-app:body -->
+<div id="fepe_covid19_donations_container">
+  <div class="row" style="background-image:url(https://images.unsplash.com/photo-1531527850951-e4a2c6d62988?ixlib=rb-1.2.1&auto=format&fit=crop&w=2536&q=80);">
+
+      <div id="donations_form"  class="col-md-6"></div>
+      <div id="" class="col-md-6"></div>
+
+  </div>
+</div>
+<!-- cot-app:body end-->
+
+<!--
+3. FOOTER
+Everything inside the cot-app:footer tag will be loaded at the end of the page's BODY tag.
+It should contain script references that this application requires.
+-->
+<!-- cot-app:footer -->
+<script src="https://www.google.com/recaptcha/api.js?render=<!--@echo RECAPTCHA_SITEKEY-->"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- From here to the next endbuild tag, all the files will be concatenated into a single file called main.js: -->
+<!--@exec startBuildTagWithCacheBuster('scripts/main.js')-->
+<!-- CoreJS uses the following core:js/endinject tag to inject bower_components javascript file references: -->
+<!-- core:js -->
+<!-- endinject -->
+
+<!-- place your application script references here: -->
+<script type="text/javascript" src="<!-- @echo SRC_PATH -->/scripts/donations_form.js"></script>
+<script type="text/javascript" src="<!-- @echo SRC_PATH -->/scripts/example_app.js"></script>
+<script type="text/javascript" src="<!-- @echo SRC_PATH -->/scripts/main.js"></script>
+
+<!-- endbuild -->
+
+<!--@if ENV!='prod'-->
+<!-- Here we log out some debug info for non-production builds-->
+<script type="text/javascript">
+  console.log('fepe_covid19_donations running on <!--@echo ENV--> environment');
+  console.log('fepe_covid19_donations qa release: <!--@echo QA_RELEASE-->');
+  console.log('fepe_covid19_donations build: <!--@echo BUILD_ID-->');
+</script>
+<!--@endif-->
+
+<!-- cot-app:footer end-->
