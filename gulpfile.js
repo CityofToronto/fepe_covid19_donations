@@ -21,23 +21,28 @@ let options = {
   //If you want to add vars to the preprocessor context, include this option
   //You can add environment-specific vars or general vars
   preprocessorContext: {
+   
     DATA: '/c3api_data/v2/DataAccess.svc/covid19_donations/submissions',
     RECAPTCHA_SITEKEY:"6LeN_XIUAAAAAEd8X21vFtkJ3_c7uA0xpUGcrGpe",
     RECAPTCHA_API_URL:"/c3api_data/v2/DataAccess.svc/cot_dts_recaptcha/app_config/ca.toronto.api.dataaccess.odata4.verify",
     COT_RECAPTCHA_CONFIG_TOKEN:"f8034f92-a3e7-4878-9f5b-f6b4814b5728",
     local: {
+      API:'https://api-dev1.toronto.ca/covid19_donations/submissions',
       ROOT_ENV: 'https://was-intra-sit.toronto.ca',
       THANKYOU_PAGE: '/data/covid19_donations-thankyou.html'
     },
     dev: {
+      API:'https://api-dev1.toronto.ca/covid19_donations/submissions',
       ROOT_ENV: 'https://was-inter-sit.toronto.ca',
       THANKYOU_PAGE: '/app_content/covid19_donations-thankyou/'
     },
     qa: {
+      API:'https://api-qa.toronto.ca/covid19_donations/submissions',
       ROOT_ENV: 'https://was-inter-qa.toronto.ca',
       THANKYOU_PAGE: '/app_content/covid19_donations-thankyou/'
     },
     prod: {
+      API:'https://api.toronto.ca/covid19_donations/submissions',
       ROOT_ENV: 'https://secure.toronto.ca',
       THANKYOU_PAGE: '/app_content/covid19_donations-thankyou/'
     }

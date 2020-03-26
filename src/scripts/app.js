@@ -2,17 +2,22 @@ class SampleApp extends (window['CotApp'] || window['CotApp']) {
   constructor() {
     super();
     this.$container = $('#donations_form');
-    this.model = new CotModel({
-      "donationItems":
-        [{"name":"Toilet Paper","description":"I have 400 rolls to donate"}],
+    this.model = new CotModel({"status":"New"});
+  }
+
+  /*
+  {
+      "status":"New",
+      "donationItems":new CotCollection(
+        [{"name":"Toilet Paper","description":"I have 400 rolls to donate"}]),
         "fullName":"Derek Matthew",
         "companyname":"My Ontario Company",
         "phone":"416-555-1234",
         "email":"derek.matthew@ontariocompany.co",
-        "preferredContact":["Email"],
-    });
-  }
-
+        "preferredContact":["Email"]
+    }
+    */
+   
   render() {
     //@if !IS_EMBEDDED
     super.render(); //this function only exists in CotApp
@@ -36,7 +41,7 @@ class SampleApp extends (window['CotApp'] || window['CotApp']) {
             url:`/*@echo THANKYOU_PAGE*/`,
             success:(res)=>{
               document.querySelector('h1').innerText = `Thank You for Your Donation`
-              this.$container.html(`${res} <p><small>/*@echo THANKYOU_PAGE*/</small></p> <hr /><p><strong>Payload:</strong><small>${JSON.stringify(this.model.toJSON())}</small></p>`)
+              this.$container.html(`${res}`)
             }
           })
         }

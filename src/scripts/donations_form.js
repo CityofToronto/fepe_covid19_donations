@@ -19,7 +19,7 @@ class DonationsForm {
     let formId = 'example_cot_form';
     return {
       id: formId, //required, a unique ID for this form
-      title: 'COVID-19 Donations', //optional, a title to display at the top of the form
+      //title: 'COVID-19 Donations', //optional, a title to display at the top of the form
       rootPath: '/*@echo SRC_PATH*//', //optional, only required for forms using validationtype=Phone fields
       success: (event) => {
         event.preventDefault(); //this prevents the formvalidation library from auto-submitting if all fields pass validation
@@ -44,9 +44,31 @@ class DonationsForm {
         //   this.model.set({'submission':res});
         //   Backbone.history.navigate(`thank-you`, { trigger: true });
         // })
-    
-
+        const useApiGateway = true;
+        if(useApiGateway)
+        grecaptcha.ready(function() {
+          grecaptcha.execute('/*@echo RECAPTCHA_SITEKEY*/').then(function(token) {
+            $.ajax({
+              url:'/*@echo API*/',
+              method:'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Origin':'/*@echo ROOT_ENV*/',
+                'g-recaptcha-response':token,
+              },
+              data:JSON.stringify(data),
+              error: function(xhr, status, error){
+                console.error(error)
+                $(".g-recaptcha").removeClass("disabled");
+              }
+            }).then(res=>{
+              model.set({'submission':res});
+              Backbone.history.navigate(`thank-you`, { trigger: true });
+            })
+          })
+        })
       
+        if(!useApiGateway)
         grecaptcha.ready(function() {
           grecaptcha.execute('/*@echo RECAPTCHA_SITEKEY*/').then(function(token) {
             $.ajax({
@@ -56,6 +78,8 @@ class DonationsForm {
               headers: {
                 'Content-Type': 'application/json',
                 'captchaResponseToken':token,
+                'Origin':'localhost',
+                'g-recaptcha-response':token,
                 'cot_recaptcha_config':'/*@echo COT_RECAPTCHA_CONFIG_TOKEN*/'
               },
               data:JSON.stringify(data),
@@ -75,7 +99,7 @@ class DonationsForm {
       sections: [
         {
           id: "example_section_one",
-          title: "",
+          title: 'Donate to COVID19 Support',
           className: 'example-form-section panel-default',
           rows: [
             {
